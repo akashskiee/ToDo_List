@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import List from "./List";
+import InputArea from "./InputArea";
+
 function App() {
   const [inputText, getInput] = useState("");
   const [listText, setList] = useState([]);
 
-  function inputClick(event) {
+  function clickInput(event) {
     getInput(event.target.value);
   }
 
-  function displayList() {
+  function listDisplay() {
     if (inputText !== "") {
       setList(prevValue => {
         return [...prevValue, inputText];
@@ -28,12 +30,11 @@ function App() {
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <div className="form">
-        <input onChange={inputClick} value={inputText} type="text" />
-        <button onClick={displayList}>
-          <span>Add</span>
-        </button>
-      </div>
+      <InputArea
+        inputClick={clickInput}
+        inputList={inputText}
+        displayList={listDisplay}
+      />
       <div>
         <ul>
           {listText.map((todo, index) => {
